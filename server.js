@@ -66,3 +66,8 @@ console.log("App listening on port 8080");
       });
     });
   });
+
+  // Application -----------------------------------------
+  app.get('*', function(req, res) {
+    res.sendfile('./public/index.html');
+  });
