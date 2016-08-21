@@ -16,6 +16,53 @@ app.use(methodOverride());
 // Initialize database connection
 mongoose.connect('mongodb://localhost/scotch_todo');
 
+// Define models
+var Todo = mongoose.model('Todo', {
+  text: String
+});
+
 // Run application
 app.listen(8080);
 console.log("App listening on port 8080");
+
+// Routes
+
+  // API -----------------------------------------------
+  // Get all todos
+  app.get('/api/todos', function(req, res) {
+    Todo.find(function(err, todos) {
+      if (err) { res.send(err); }
+
+      // Return all todos in JSON format
+      res.json(todos);
+    });
+  });
+
+  // Create todo and send back all todos after creation
+  app.post('/api/todos', function(req, res) {
+    Todo.create({
+      text: req.body.text,
+      done: false
+    }, function(err, todo) {
+      if (err) { res.send(err); }
+
+      Todo.find(function(err, todos) {
+        if (err) { res.send(err); }
+        res.json(todos);
+      });
+    });
+  });
+
+  // Delete todo
+  app.delete('/api/todos/:todo_id', function(req, req) {
+    Todo.remove({
+      _id: req.params.todo_id
+    }, function(err, todo) {
+      if (err) { res.send(err); }
+
+      Todo.find(function(err, todos) {
+        if (err) { res.send(err); }
+        res.json(todos);
+      });
+    });
+  });
