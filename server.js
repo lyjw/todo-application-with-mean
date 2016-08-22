@@ -23,4 +23,4 @@ require('./app/routes')(app);
 
 // Run application
 app.listen(port);
-console.log("App listening on port" + port);
+console.log("App listening on port " + port);
