@@ -54,7 +54,7 @@ console.log("App listening on port 8080");
   });
 
   // Delete todo
-  app.delete('/api/todos/:todo_id', function(req, req) {
+  app.delete('/api/todos/:todo_id', function(req, res) {
     Todo.remove({
       _id: req.params.todo_id
     }, function(err, todo) {

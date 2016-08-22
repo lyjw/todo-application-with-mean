@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="scotchTodo">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Node and Angular Todo App</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
   </head>
-  <body>
-    <h1>Hello World</h1>
+  <body ng-controller="mainController">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="jumbotron text-center">
+        <h1>I write Todo-lists <span class="label label-info">{{ todos.length }}</span></h1>
+      </div>
+
+      <!-- Todo List -->
+      <div id="todo-list" class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="checkbox" ng-repeat="todo in todos">
+              <label>
+                <input type="checkbox" ng-click="deleteTodo(todo._id)">
+                  {{ todo.text }}
+                </input>
+              </label>
+            </div>
+        </div>
+      </div>
+
+      <!-- Create Todo -->
+      <div class="todo-form" class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control input-lg text-center" placeholder="Finish homework" ng-model="formData.text">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+          </form>
+
+        </div>
+      </div>
+
+
+    </div>
   </body>
 </html>
